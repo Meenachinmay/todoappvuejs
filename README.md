@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # todoapp
 
 ## Project setup
@@ -22,3 +23,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+=======
+# todoappvuejs
+todo app using vue js
+>>>>>>> 83c297fc3eb9e1ef928dd353730761d920623e42
