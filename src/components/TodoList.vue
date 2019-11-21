@@ -3,7 +3,7 @@
         <input type="text" class="inline-block border-2 border-gray-300 w-full text-lg px-5 py-1 rounded hover:border-gray-500 mb-5 focus:outline-none" 
             placeholder="What needs to be done...!" v-model="newTodo" @keyup.enter="addNewTodo">
         
-        <div v-for="(todo, index) in todos" :key="todo.id" class="flex mb-4 justify-between items-center text-xl text-gray-700 font-medium antialiased">
+        <div v-for="(todo, index) in todosFilterd" :key="todo.id" class="flex mb-4 justify-between items-center text-xl text-gray-700 font-medium antialiased">
           <div class="mr-3">
               <label class="custom-label flex">
                     <div class="bg-gray-100 rounded-full border border-gray-200 shadow w-5 h-5 p-1 flex justify-center items-center mr-2">
@@ -63,8 +63,40 @@
                     <label class="uppercase tracking-loose text-xs font-normal leading-normal">Check All</label>
                 </label>
             </div>
-            <div>
-                middle
+            <div class="flex items-center">
+                <button class="uppercase text-xs font-medium text-gray-600 
+                focus:outline-none 
+                hover:bg-green-500 
+                hover:text-white 
+                rounded bg-gray-200 
+                border border-gray-200 
+                inline-block 
+                text-center px-1 py-1 mr-2"
+                :class="{ 'bg-green-500 text-blue-100': filter == 'all'}" @click="filter = 'all'">
+                    All
+                </button>
+                <button class="uppercase text-xs font-medium text-gray-600 
+                focus:outline-none 
+                hover:bg-green-500 
+                hover:text-white 
+                rounded bg-gray-200 
+                border border-gray-200 
+                inline-block 
+                text-center px-1 py-1 mr-2"
+                :class="{ 'bg-green-500 text-blue-100': filter == 'active'}" @click="filter = 'active'">
+                    Active
+                </button>
+                <button class="uppercase text-xs font-medium text-gray-600 
+                focus:outline-none 
+                hover:bg-green-500 
+                hover:text-white 
+                rounded bg-gray-200 
+                border border-gray-200 
+                inline-block 
+                text-center px-1 py-1 mr-2"
+                :class="{ 'bg-green-500 text-blue-100': filter == 'completed'}" @click="filter = 'completed'">
+                    Completed
+                </button>
             </div>
             <div>
                 {{ remaining }}
@@ -83,6 +115,9 @@ export default {
           newTodo: '',
           idForTodo: '4',
           beforeEditCache: '',
+          remainingTodos: '',
+          filter: 'all',
+          emptymessage: '',                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
           todos: [
             {
                 'id': 1,
@@ -103,6 +138,14 @@ export default {
                 'editing': false
             }
           ],
+          emptyTodos: [
+              {
+                'id': 19999999,
+                'title': 'NO TASK IS HERE!',
+                'completed': false,
+                'editing': false
+              }
+          ],
       }
   },
   directives: {
@@ -118,7 +161,21 @@ export default {
       },
       anyRemaining(){
           return this.remaining != 0;
-      }
+      },
+      todosFilterd(){
+          if (this.filter == 'all') {
+              return this.todos;
+          } else if (this.filter == 'active') {
+            //   if (this.todos.filter((todo) => !todo.completed).length == 0){
+            //       return this.emptyTodos;
+            //   }
+              return this.todos.filter((todo) => !todo.completed);
+          } else if (this.filter == 'completed') {
+              return this.todos.filter((todo) => todo.completed);
+          }
+
+          return this.todos;
+      },
   },
   methods: {
       addNewTodo(){
@@ -168,5 +225,10 @@ export default {
    .completed{
        text-decoration: line-through;
        color: gray;
+   }
+
+   .custom {
+       background-color: green;
+       color: white;
    }
 </style>
