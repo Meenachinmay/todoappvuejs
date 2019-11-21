@@ -3,7 +3,7 @@
         <input type="text" class="inline-block border-2 border-gray-300 w-full text-lg px-5 py-1 rounded hover:border-gray-500 mb-5 focus:outline-none" 
             placeholder="What needs to be done...!" v-model="newTodo" @keyup.enter="addNewTodo">
         
-        <div v-for="todo in todos" :key="todo.id" class="flex mb-4 justify-between items-center text-xl text-gray-700 antialiased">
+        <div v-for="(todo, index) in todos" :key="todo.id" class="flex mb-4 justify-between items-center text-xl text-gray-700 antialiased">
           <div class="w-full">
               <div v-if="!todo.editing" @dblclick="editTodo(todo)" class="border border-white">{{ todo.title }}</div>
               <input v-else type="text" class="inline-block border-2 border-gray-300 w-full text-lg px-5 py-1 rounded hover:border-gray-500 focus:outline-none" 
@@ -11,7 +11,7 @@
                 @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" v-focus>
           </div>
           
-          <div class="cursor-pointer mx-14 hover:text-gray-900 ml-3" @click="removeTodo(key)">
+          <div class="cursor-pointer mx-14 hover:text-gray-900 ml-3" @click="removeTodo(index)">
               &times;
           </div>
         </div>
