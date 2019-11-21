@@ -1,9 +1,9 @@
 <template>
-    <div class="flex-col flex-1 font-sans">
+    <div class="flex-col flex-1 font-sans overflow-hidden">
         <input type="text" class="inline-block border-2 border-gray-300 w-full text-lg px-5 py-1 rounded hover:border-gray-500 mb-5 focus:outline-none" 
             placeholder="What needs to be done...!" v-model="newTodo" @keyup.enter="addNewTodo">
         
-        <div v-for="(todo, index) in todosFilterd" :key="todo.id" class="flex mb-4 justify-between items-center text-xl text-gray-700 font-medium antialiased">
+        <div v-for="(todo, index) in todosFilterd" :key="todo.id" class="flex mb-4 justify-between items-center text-lg text-gray-700 antialiased overflow-y-auto">
           <div class="mr-3">
               <label class="custom-label flex">
                     <div class="bg-gray-100 rounded-full border border-gray-200 shadow w-5 h-5 p-1 flex justify-center items-center mr-2">
@@ -103,7 +103,6 @@
                 <label class="uppercase tracking-loose text-xs font-normal leading-normal">Remaining Todos</label>
             </div>
         </div>
-
     </div>
 </template>
 
