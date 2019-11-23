@@ -1,10 +1,13 @@
 <template>
-    <div class="flex-col flex-1 font-sans overflow-hidden">
+    <div class="flex-col flex-1 font-sans">
         <input type="text" class="inline-block border-2 border-gray-300 w-full text-lg px-5 py-1 rounded hover:border-gray-500 mb-5 focus:outline-none" 
             placeholder="What needs to be done...!" v-model="newTodo" @keyup.enter="addNewTodo">
-        
-        <div v-for="(todo, index) in todosFilterd" :key="todo.id" class="flex mb-4 justify-between items-center text-lg text-gray-700 antialiased overflow-y-auto">
-          <div class="mr-3">
+        <!-- code to render each todo -->
+        <div v-for="(todo, index) in todosFilterd" :key="todo.id" class="flex mb-4 justify-between 
+            items-center text-lg text-gray-700 
+            antialiased overflow-y-auto">
+            <!-- checkbox code start -->
+            <div class="mr-3">
               <label class="custom-label flex">
                     <div class="bg-gray-100 rounded-full border border-gray-200 shadow w-5 h-5 p-1 flex justify-center items-center mr-2">
                         <input type="checkbox" class="hidden" v-model="todo.completed">
@@ -22,6 +25,8 @@
                     </div>
                 </label>
           </div>
+          <!-- checkbox code ends -->
+          <!-- todo item code start -->
           <div class="w-full">
               <div v-if="!todo.editing" @dblclick="editTodo(todo)" 
               class="border border-white font-medium"
@@ -42,7 +47,10 @@
           <div class="cursor-pointer mx-14 hover:text-gray-900 ml-3" @click="removeTodo(index)">
               &times;
           </div>
+          <!-- todo item code ends -->
         </div>
+        <!-- code ends to render each todo -->
+        <!-- filter code start -->
         <div class="flex flex-1 px-3 py-2 border border-gray-300 bg-gray-100 items-center justify-between text-gray-600 font-medium">
             <div>
                 <label class="custom-label flex items-center">
@@ -103,6 +111,8 @@
                 <label class="uppercase tracking-loose text-xs font-normal leading-normal">Remaining Todos</label>
             </div>
         </div>
+        <!-- filter code ends -->
+
     </div>
 </template>
 
